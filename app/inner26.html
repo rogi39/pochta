@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width">
+	<link rel="icon" href="images/favicon.png">
+	<meta property="og:image" content="images/dest/preview.jpg">
+	<link rel="stylesheet" href="css/app.min.css">
+
+</head>
+
+<body class="body">
+
+	<div class="section section_inner">
+		<div class="container">
+			<div class="header header_inner">
+				<img src="images/logo.svg" alt="logo" class="header__logo">
+				<img src="images/logo-text.svg" alt="logo" class="header__text">
+			</div>
+
+			<div class="inner-block">
+				<img src="images/convert-inner.svg" alt="convert" class="convert-inner">
+
+				<div class="inner">
+					<ul class="breadcrumb">
+						<li class="breadcrumb__item">
+							<a href="#" class="breadcrumb__link">Главная</a>
+						</li>
+						<li class="breadcrumb__item breadcrumb__item_active">26 декабря</li>
+					</ul>
+					<div class="inner__row">
+						<div class="inner__left">
+							<div class="inner__title">Почтово-кино-новогодний квиз</div>
+							<div class="inner__text">Представляем вашему вниманию праздничный почтово-кино-новогодний квиз! Впереди<br><b>8 вопросов, желаем удачи!</b></div>
+						</div>
+						<div class="inner__right">
+							<div class="rebus">
+								<div class="rebus__text">Отгадай слово, и впиши его в последнем письме</div>
+								<div class="rebus__img-block">
+									<img src="images/rebus.jpg" alt="rebus" class="rebus__img">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<form class="form form_question quiz-form"></form>
+					<script>
+						document.addEventListener("DOMContentLoaded", function () {
+							let quiz = '[{ "question": "1. Как звали почтовую сову Гарри Поттера?", "type": "radio", "image": "images/answer1.jpg", "answers": ["Белуха", "Букля", "Шикля"], "correct": 1 }, { "question": "2. Как зовут этого актера?", "type": "radio", "image": "images/answer2.jpg", "answers": ["Джон Траволта", "Джим Керри", "Брюс Уиллис"], "correct": 1 }, { "question": "3. Это кадр из мультфильма «Снеговик-почтовик», вспомните или угадайте, что написано на конверте?", "type": "radio", "image": "images/answer3.jpg", "answers": ["Дедушке Морозу от ребят", "На Северный Полюс пингвину Ермолке", "Снеговику-почтовику на меховую шапку и теплый тулуп"], "correct": 0 }, { "question": "4. Рождество, Джон Макклейн, небоскреб, орех –  к какому фильму относятся эти слова-подсказки?", "type": "text", "answers": [], "correct": "крепкий орешек" }, { "question": "5. Из-за чего поссорились Матроскин и Шарик в мультфильме «Зима в Простоквашино»?", "type": "radio", "image": "", "answers": ["Шарик нарисовал на печке рисунок, а Матроскин его раскритиковал, и Шарик обиделся", "Матроскин хотел съесть сосиску, а оказалось, что Шарик её уже съел сам, хоть она ему не принадлежала", "Шарик купил вместо валенок кеды, Матроскин назвал его балбесом, и тот обиделся"], "correct": 2 }, { "question": "6. Откуда эта песня – «Ждёт твоих подарочков ребятня. И тебе достанется от меня!»?", "type": "radio", "image": "", "answers": ["Снеговик-Почтовик", "Гринч, похититель Рождества", "Ну, погоди!"], "correct": 2 }, { "question": "7. В фильме «Гринч, похититель Рождества» главный положительный персонаж – девочка по имени Синди Лу. Вспомните или угадайте, кем работал её отец?", "type": "radio", "image": "", "answers": ["Мэром города", "Почтовым работником", "Он был безработным богачом"], "correct": 1 }, { "question": "8. «Рождественская история» – это экранизация повести Чарльза Диккенса «Рождественская песнь». Вспомните или угадайте, как звали этого персонажа?", "type": "radio", "image": "images/answer8.jpg", "answers": ["Скрудж", "Крэтчит", "Шварц"], "correct": 0 }]';
+							let arr = JSON.parse(quiz);
+							let tmp = [];
+							let cookieTime = 30 * 24 * 60 * 60;
+
+							if (getCookie('quizFinish') == 1) {
+								renderResult();
+							} else {
+								renderForm();
+
+								let arrLength = arr.length;
+								document.querySelector('.quiz-count').textContent = arrLength;
+
+								let current = document.querySelector('.quiz-current').textContent;
+
+								renderQuestion(current);
+
+								answersListener();
+
+								let navigation = document.querySelectorAll('.quiz-navigation');
+								navigation.forEach(el => {
+									el.addEventListener('click', function (e) {
+										e.preventDefault();
+										let target = e.target;
+										let bar = document.querySelector('.quiz-bar');
+										if (target.dataset.finish == 1) {
+											let confirmn = confirm('Завершить квиз?');
+											if (confirmn) {
+												let answers;
+												if (getCookie('quiz')) {
+													answers = JSON.parse(getCookie('quiz'));
+												}
+												let result = getResult(answers);
+												document.cookie = `quizFinish=1; max-age=${cookieTime}; path=/`;
+												document.cookie = `quizRes=${result}; max-age=${cookieTime}; path=/`;
+												renderResult();
+												return false;
+											}
+										}
+										if (target.dataset.quizNav == 'next' && current < arrLength) {
+											current++;
+											document.querySelector('.quiz-current').textContent = current;
+											bar.style.width = 12.5 * current + "%";
+											if (current == arrLength) {
+												target.dataset.finish = 1;
+												target.textContent = 'Завершить квиз';
+											}
+										}
+										if (target.dataset.quizNav == 'prev' && current > 1) {
+											current--;
+											document.querySelector('.quiz-current').textContent = current;
+											bar.style.width = 12.5 * current + "%";
+											if (current != arrLength) {
+												target.nextElementSibling.dataset.finish = 0;
+												target.nextElementSibling.textContent = 'Следующий вопрос';
+											}
+										}
+										renderQuestion(current);
+										answersListener();
+
+									});
+								});
+							}
+
+							function renderResult() {
+								document.querySelector('.quiz-form').innerHTML = '';
+								let res = '<span>' + getCookie('quizRes') + '</span>' + num_word(getCookie('quizRes'), [' вопрос!', ' вопроса!', ' вопросов!']);
+								let html = `
+								<div class="quiz-form__finish">
+									<img src="images/quizfinish.png" alt="quiz" class="quiz-form__finish-img">
+									<div class="quiz-form__finish-title">Вы прошли квиз, ответив правильно на ${res}</div>
+									<div class="quiz-form__finish-text">Возможно, вы захотели пересмотреть какие-то фильмы или мультики. Что ж, длинные зимние вечера – это лучшее время для кинопросмотров в хорошей компании!»</div>
+									<a href="/" class="btn btn_quiz btn_quiz-reverse">На главную страницу</a>
+								</div>
+								`;
+								document.querySelector('.quiz-form').insertAdjacentHTML('beforeend', html);
+							}
+
+							function renderForm() {
+								let html = `
+								<div class="form__question-number">Вопрос <span class="quiz-current">1</span> из <span class="quiz-count"></span></div>
+								<div class="form__bar">
+									<div class="form__bar-progress quiz-bar"></div>
+								</div>
+								<div class="form__question-row">
+									<div class="form__question-left quiz-img"></div>
+									<div class="form__question-right">
+										<div class="form__question-title quiz-title"></div>
+										<div class="form__question-answer-row quiz-answers"></div>
+										<div class="form__question-btn-row">
+											<a href="#" class="btn btn_quiz quiz-navigation" data-quiz-nav="prev">Предыдущий вопрос</a>
+											<a href="#" class="btn btn_quiz quiz-navigation" data-quiz-nav="next">Следующий вопрос</a>
+										</div>
+									</div>
+								</div>
+								`;
+								document.querySelector('.quiz-form').insertAdjacentHTML('beforeend', html);
+							}
+
+							function renderQuestion(current) {
+								let currentAnswer;
+								if (getCookie('quiz')) {
+									currentAnswer = JSON.parse(getCookie('quiz'));
+								}
+								let type = arr[current - 1].type;
+								let image = document.querySelector('.quiz-img');
+								if (image.firstChild) {
+									image.removeChild(image.firstChild);
+								}
+								if (arr[current - 1].image) {
+									image.insertAdjacentHTML('beforeend', `<img class="quiz-img" src="${arr[current - 1].image}" alt="${arr[current - 1].question}">`);
+								}
+								let question = document.querySelector('.quiz-title');
+								question.textContent = arr[current - 1].question;
+								let answers = document.querySelector('.quiz-answers');
+								answers.innerHTML = '';
+								let answersHtml = '';
+								if (type == 'radio') {
+									arr[current - 1].answers.forEach((el, i) => {
+										answersHtml += `
+										<div class="form__question-answer-item">
+												<input type="radio" class="form__question-radio" name="answer" value="${current - 1}-${i}" id="answer${i}" ${currentAnswer && i == currentAnswer[current - 1] ? 'checked' : ''}>
+												<label class="form__question-answer" for="answer${i}">
+													<div class="form__question-answer-box"></div>
+													<div class="form__question-answer-text">${el}</div>
+												</label>
+											</div>
+										`;
+									});
+								} else {
+									answersHtml += `
+									<div class="form__question-answer-item">
+										<input type="text" class="form__input" placeholder="Введите ответ" name="${current - 1}" value="${currentAnswer && currentAnswer[current - 1] ? currentAnswer[current - 1] : ''}">
+										</div>
+									`;
+								}
+
+								answers.insertAdjacentHTML('beforeend', answersHtml);
+							}
+
+							function answersListener() {
+								let inputs = document.querySelectorAll('.quiz-form input');
+								inputs.forEach(el => {
+									el.addEventListener('input', function (e) {
+										if (getCookie('quiz')) {
+											tmp = JSON.parse(getCookie('quiz'));
+										}
+										if (el.type == 'radio') {
+											let currentAnswer = el.value.split('-');
+											tmp[currentAnswer[0]] = currentAnswer[1];
+										} else {
+											tmp[el.name] = el.value;
+										}
+
+										document.cookie = `quiz=${JSON.stringify(tmp)}; max-age=${cookieTime}; path=/`;
+									});
+								});
+							}
+
+
+							function getResult(answers) {
+								let counter = 0;
+								arr.forEach((el, i) => {
+									if (answers && answers[i]) {
+										let answer = answers[i].replace(/\s+/g, ' ').trim().toLowerCase();
+										if (el.correct == answer) counter++
+									}
+								});
+								return counter;
+							}
+
+
+						});
+					</script>
+				</div>
+			</div>
+
+			<div class="header header_bottom">
+				<img src="images/logo.svg" alt="logo" class="header__logo">
+			</div>
+		</div>
+
+
+	</div>
+
+	<script src="js/app.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width">
+	<link rel="icon" href="images/favicon.png">
+	<meta property="og:image" content="images/dest/preview.jpg">
+	<link rel="stylesheet" href="css/app.min.css">
+
+</head>
+
+<body class="body">
+
+	<div class="section section_inner">
+		<div class="container">
+			<div class="header header_inner">
+				<img src="images/logo.svg" alt="logo" class="header__logo">
+				<img src="images/logo-text.svg" alt="logo" class="header__text">
+			</div>
+
+			<div class="inner-block">
+				<img src="images/convert-inner.svg" alt="convert" class="convert-inner">
+
+				<div class="inner">
+					<ul class="breadcrumb">
+						<li class="breadcrumb__item">
+							<a href="#" class="breadcrumb__link">Главная</a>
+						</li>
+						<li class="breadcrumb__item breadcrumb__item_active">27 декабря</li>
+					</ul>
+					<div class="inner__row">
+						<div class="inner__left">
+							<div class="inner__title">Погадаем?</div>
+							<div class="inner__text">Перед вами печеньки, но не простые, а с предсказаниями. Выберите печеньку, нажмите на нее, и она откроется!</div>
+						</div>
+						<div class="inner__right">
+							<div class="rebus">
+								<div class="rebus__text">Отгадай слово, и впиши его в последнем письме</div>
+								<div class="rebus__img-block">
+									<img src="images/rebus.jpg" alt="rebus" class="rebus__img">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="inner__cookie-row cookie-js">
+						<div class="inner__cookie-col">
+							<div class="inner__cookie-item" data-cookie-number="0">
+								<img src="/images/cookie.svg" alt="cookie" class="inner__cookie">
+							</div>
+						</div>
+						<div class="inner__cookie-col">
+							<div class="inner__cookie-item" data-cookie-number="1">
+								<img src="images/cookie.svg" alt="cookie" class="inner__cookie">
+							</div>
+						</div>
+						<div class="inner__cookie-col">
+							<div class="inner__cookie-item" data-cookie-number="2">
+								<img src="images/cookie.svg" alt="cookie" class="inner__cookie">
+							</div>
+						</div>
+						<div class="inner__cookie-col">
+							<div class="inner__cookie-item" data-cookie-number="3">
+								<img src="images/cookie.svg" alt="cookie" class="inner__cookie">
+							</div>
+						</div>
+					</div>
+
+
+					<script>
+						document.addEventListener("DOMContentLoaded", function () {
+							renderOpenCookie();
+							let cookieTime = 30 * 24 * 60 * 60;
+							let cookies = document.querySelectorAll('.inner__cookie-item');
+							let tmp = [];
+							cookies.forEach(el => {
+								if (getCookie('cookieArr')) {
+									tmp = JSON.parse(getCookie('cookieArr'));
+								}
+								el.addEventListener('click', function (e) {
+									if (!tmp.includes(el.dataset.cookieNumber)) {
+										tmp.push(el.dataset.cookieNumber);
+										document.cookie = `cookieArr=${JSON.stringify(tmp)}; max-age=${cookieTime}; path=/`;
+										renderOpenCookie();
+									}
+								});
+							});
+
+						});
+
+						function renderOpenCookie() {
+							if (getCookie('cookieArr')) {
+								let arr = JSON.parse(getCookie('cookieArr'));
+								arr.forEach(el => {
+									let item = document.querySelector(`.inner__cookie-item[data-cookie-number="${el}"]`);
+									// console.log(item.querySelector('img').src);
+									item.querySelector('img').src = '/images/cookie-open.svg';
+									// console.log(document.querySelector(`.inner__cookie-item[data-cookie-number="${el}"]`));
+								});
+								// console.log(arr);
+							}
+						}
+
+					</script>
+
+				</div>
+			</div>
+
+			<div class="header header_bottom">
+				<img src="images/logo.svg" alt="logo" class="header__logo">
+			</div>
+		</div>
+
+
+	</div>
+
+	<script src="js/app.min.js"></script>
+
+</body>
+
+</html>

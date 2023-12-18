@@ -1,0 +1,1041 @@
+@import config
+
+.noscroll
+	overflow: hidden
+
+.response
+	position: relative
+	z-index: 2
+
+.success
+	margin-top: 30px
+	background-color: #3fb53f
+	padding: 20px
+	color: #fff
+	animation: fade .25s ease
+	p
+		margin: 0
+
+.errors-list
+	list-style-type: none
+	padding: 0
+	margin-top: 30px
+	background-color: #da4c4c
+	padding: 20px
+	color: #fff
+	animation: fade .25s ease
+
+img
+	max-width: 100%
+	height: auto
+	user-select: none
+
+.video
+	position: relative
+	text-decoration: none
+	border-radius: 6px
+	padding-bottom: 56.25%
+	height: 0
+	overflow: hidden
+	margin-bottom: 30px
+	iframe, video
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		border-width: 0
+		outline-width: 0
+
+.lg-backdrop.in
+	opacity: 0.55
+
+.lg-outer .lg-thumb-outer, .lg-outer .lg-toggle-thumb
+	background-color: rgba(0,0,0, .45)
+
+.breadcrumb-block
+	padding: 20px 0
+	+media-breakpoint-up(sm)
+		padding: 40px 0
+
+.breadcrumb
+	margin: 0
+	list-style-type: none
+	display: flex
+	font-size: 14px
+	line-height: 19px
+	position: relative
+	z-index: 1
+	padding: 0
+	overflow-x: auto
+	position: relative
+	margin-bottom: 20px
+	+media-breakpoint-up(sm)
+		margin-bottom: 32px
+		font-size: 16px
+		overflow: hidden
+		flex-wrap: wrap
+		padding-bottom: 0
+	&__item
+		flex: 0 0 auto
+		+media-breakpoint-up(sm)
+			flex: initial
+	&__link
+		color: #7198D2
+		&:after
+			content: '—'
+			margin: 0 5px
+			color: $text
+		&:hover
+			text-decoration: none
+			color: #7198D2
+			&:after
+				color: $text
+	&__item_active
+		color: $text
+
+.pagination
+	list-style-type: none
+	padding: 0
+	display: flex
+	margin: 0
+	margin-top: 30px
+	&__item
+		margin-right: 8px
+		flex: 0 0 33px
+		width: 33px
+		height: 33px
+		+media-breakpoint-up(sm)
+			flex: 0 0 40px
+			width: 40px
+			height: 40px
+	&__item_active .pagination__link
+		border-color: $accent
+		background-color: $accent
+		color: #fff
+	&__link
+		background-color: transparent
+		font-size: 16px
+		line-height: 25px
+		height: 100%
+		width: 100%
+		color: #000
+		display: flex
+		align-items: center
+		justify-content: center
+		text-decoration: none
+		border-radius: 50%
+		transition: border-color .25s ease, color .25s ease, background-color .25s ease
+		border-color: #000
+		border: 1px solid $accent
+		color: #000
+		&:hover
+			text-decoration: none
+			border-color: $accent
+			color: #fff
+			background-color: $accent
+
+.content
+	margin-bottom: 30px
+	&_m0
+		margin: 0
+	iframe
+		width: 100%
+		margin: 0 auto !important
+	p
+		font-size: 16px
+		font-weight: 400
+		line-height: 24px
+		color: $text
+		margin: 0
+		&:not(:last-child)
+			margin-bottom: 10px
+		+media-breakpoint-up(sm)
+			&:not(:last-child)
+				margin-bottom: 24px
+	b, strong
+		font-weight: 700
+		font-size: 17px
+		line-height: 24px
+		margin-bottom: 15px
+	a
+		color: $accent
+		text-decoration: underline
+		&:hover
+			text-decoration: none
+	img
+		margin-bottom: 30px
+		border-radius: 15px
+	h2
+		font-size: 20px
+		line-height: 26px
+		color: $text
+		font-weight: 600
+		margin-bottom: 20px
+		+media-breakpoint-up(sm)
+			font-size: 24px
+			line-height: 30px
+	h3
+		font-size: 19px
+		line-height: 25px
+		color: $text
+		font-weight: 600
+		margin-top: 40px
+		margin-bottom: 20px
+	ol
+		padding: 0
+		padding-left: 17px
+		margin-left: 10px
+		li
+			margin-bottom: 10px
+			padding-left: 8px
+		li::marker
+			color: $accent
+			font-weight: 700
+	ul
+		list-style-type: none
+		margin-left: 10px
+		padding: 0
+		margin-bottom: 15px
+		+media-breakpoint-up(sm)
+			margin-bottom: 25px
+		li
+			font-size: 16px
+			line-height: 24px
+			font-weight: 300
+			margin-bottom: 10px
+			// display: flex
+			position: relative
+			padding-left: 25px
+			&:before
+				content: ''
+				position: absolute
+				left: 0
+				height: 8px
+				width: 8px
+				flex: 0 0 8px
+				border-radius: 50%
+				background-color: $accent
+				box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25)
+				display: inline-block
+				margin-right: 15px
+				margin-top: 7px
+
+.btn
+	color: #fff
+	font-size: 14px
+	font-weight: 600
+	line-height: 120%
+	background-color: $accent
+	padding: 15px 20px
+	border-radius: 12px
+	border: 1px solid $accent
+	transition: background-color .35s ease-out, color .35s ease-out
+	display: inline-block
+	width: 100%
+	text-align: center
+	&:hover
+		background-color: transparent
+		color: $accent
+		text-decoration: none
+	+media-breakpoint-up(sm)
+		width: initial
+		min-width: 156px
+	&_reverse
+		background-color: transparent
+		color: $accent
+		&:hover
+			background-color: $accent
+			color: #fff
+	&_quiz
+		background-color: #4E68D6
+		border-color: #4E68D6
+		flex: 1 1 auto
+		&:hover
+			color: #4E68D6
+	&_quiz-reverse
+		background-color: transparent
+		color: #4E68D6
+		&:hover
+			background-color: #4E68D6
+			color: #fff
+	+media-breakpoint-up(sm)
+		padding: 20px 25px
+		font-size: 16px
+	+media-breakpoint-up(md)
+		padding: 20px 32px
+
+.section
+	padding: 30px 0
+	min-height: 100vh
+	+media-breakpoint-up(sm)
+		padding: 40px 0
+	+media-breakpoint-up(xl)
+		padding: 80px 0
+	&_inner
+		position: relative
+	&_gray
+		background-color: #fafafa
+
+.container
+	padding: 0 10px
+	margin: 0 auto
+	width: 100%
+	+media-breakpoint-up(xl)
+		max-width: 1340px
+	&_text
+		+media-breakpoint-up(xl)
+			max-width: 811px
+
+.row
+	display: flex
+	flex-wrap: wrap
+	margin: 0 -15px
+
+.header
+	margin-bottom: 30px
+	display: flex
+	align-items: flex-end
+	+media-breakpoint-up(sm)
+		margin-bottom: 40px
+	&_inner
+		+media-breakpoint-up(sm)
+			justify-content: space-between
+	&_bottom
+		margin-bottom: 0
+		margin-top: 30px
+		justify-content: center
+		+media-breakpoint-up(sm)
+			margin-top: 50px
+	/* .header__logo */
+	&__logo
+		margin-right: 20px
+		max-width: 80px
+		+media-breakpoint-up(sm)
+			margin-right: 30px
+			max-width: initial
+	/* .header__text */
+	&__text
+		max-width: 200px
+		+media-breakpoint-up(sm)
+			max-width: initial
+
+.first
+	position: relative
+	margin-bottom: 40px
+	+media-breakpoint-up(sm)
+		margin-bottom: 80px
+	+media-breakpoint-up(md)
+		margin-bottom: 116px
+	/* .first__block */
+	&__block
+		max-width: 907px
+		background-color: #fff
+		border-radius: 20px
+		padding: 20px 100px 20px 20px
+		+media-breakpoint-up(sm)
+			border-radius: 30px
+			padding: 50px 190px 50px 50px
+		+media-breakpoint-up(md)
+			border-radius: 60px
+		+media-breakpoint-up(lg)
+			padding: 72px 190px 72px 80px
+	/* .first__tree */
+	&__tree
+		position: absolute
+		right: 0px
+		bottom: 0px
+		max-width: 120px
+		+media-breakpoint-up(sm)
+			max-width: 190px
+		+media-breakpoint-up(md)
+			max-width: 280px
+			bottom: -180px
+		+media-breakpoint-up(lg)
+			max-width: 350px
+		+media-breakpoint-up(xl)
+			right: 80px
+			max-width: initial
+		+media-breakpoint-up(wxp)
+			right: 160px
+	/* .first__text */
+	&__text
+		font-size: 18px
+		font-weight: 700
+		position: relative
+		z-index: 1
+		+media-breakpoint-up(sm)
+			font-size: 24px
+		+media-breakpoint-up(md)
+			font-size: 32px
+		+media-breakpoint-up(xl)
+			font-size: 40px
+		// line-height: 150%
+		span
+			color: $accent
+
+.preview
+	max-width: 1020px
+	background-color: #fff
+	border-radius: 20px
+	padding: 20px
+	margin: 0 auto
+	background-image: url('../images/preview__bg.png')
+	background-repeat: no-repeat
+	background-position: right bottom
+	background-size: 80%
+	padding-bottom: 50px
+	+media-breakpoint-up(sm)
+		background-size: auto
+		border-radius: 30px
+		padding: 50px
+	+media-breakpoint-up(md)
+		border-radius: 60px
+	+media-breakpoint-up(lg)
+		padding: 70px
+	+media-breakpoint-up(xl)
+		padding: 100px
+	/* .preview__block */
+	&__block
+		&:not(:last-child)
+			margin-bottom: 20px
+		+media-breakpoint-up(sm)
+			&:not(:last-child)
+				margin-bottom: 40px
+	/* .preview__title-row */
+	&__title-row
+		display: flex
+		align-items: center
+		justify-content: space-between
+		margin-bottom: 16px
+	/* .preview__title */
+	&__title
+		font-size: 18px
+		font-weight: 600
+		line-height: 180%
+		+media-breakpoint-up(sm)
+			font-size: 22px
+		+media-breakpoint-up(md)
+			font-size: 32px
+	/* .preview__line */
+	&__line
+		width: 100%
+		flex: 1
+		height: 3px
+		border-bottom: 3px dashed #ACA3D0
+		margin-left: 18px
+		+media-breakpoint-up(sm)
+			margin-left: 48px
+	/* .preview__text */
+	&__text
+		p
+			font-weight: 500
+			line-height: 180%
+			margin-bottom: 0
+			&:not(:last-child)
+				margin-bottom: 16px
+		+media-breakpoint-up(sm)
+			p
+				&:not(:last-child)
+					margin-bottom: 32px
+
+.preview-ps
+	background-color: #0080FB
+	border-radius: 20px
+	color: #fff
+	font-weight: 500
+	line-height: 180%
+	padding: 20px
+	max-width: 918px
+	margin: 0 auto
+	transform: rotate(-3deg)
+	position: relative
+	bottom: 30px
+	margin-bottom: 30px
+	+media-breakpoint-up(sm)
+		bottom: 50px
+		padding: 30px
+		border-radius: 48px
+	+media-breakpoint-up(md)
+		padding: 30px 50px
+		margin-bottom: 50px
+
+.calendar
+	/* .calendar__title */
+	&__title
+		color: #fff
+		font-size: 28px
+		font-weight: 700
+		line-height: 140%
+		text-align: center
+		margin-bottom: 38px
+		+media-breakpoint-up(sm)
+			margin-bottom: 48px
+			font-size: 48px
+	/* .calendar__item */
+	&__item
+		max-width: 869px
+		position: relative
+		margin: 0 auto
+		&:not(:last-child)
+			margin-bottom: 20px
+		+media-breakpoint-up(sm)
+			&:not(:last-child)
+				margin-bottom: 40px
+		+media-breakpoint-up(md)
+			&:not(:last-child)
+				margin-bottom: 80px
+	/* .calendar__item-text */
+	&__item-text
+		position: absolute
+		// top: 56px
+		top: 15px
+		// left: 90px
+		left: 15px
+		+media-breakpoint-up(sm)
+			top: 13%
+			left: 10%
+	/* .calendar__date-text */
+	&__date-text
+		text-align: center
+		font-size: 14px
+		font-weight: 500
+		line-height: 140%
+		max-width: 104px
+		+media-breakpoint-up(sm)
+			font-size: 16px
+		+media-breakpoint-up(md)
+			font-size: 18px
+	/* .calendar__date-date */
+	&__date-date
+		color: $accent
+		text-align: center
+		font-size: 36px
+		font-weight: 500
+		line-height: 100%
+		margin: 8px 0
+		+media-breakpoint-up(sm)
+			font-size: 66px
+		+media-breakpoint-up(md)
+			font-size: 96px
+	/* .calendar__date-month */
+	&__date-month
+		color: $accent
+		font-size: 18px
+		font-weight: 500
+		line-height: 100%
+		text-align: center
+		+media-breakpoint-up(sm)
+			font-size: 20px
+		+media-breakpoint-up(md)
+			font-size: 24px
+	/* .calendar__img */
+	&__img
+	&__img_open
+		position: absolute
+		bottom: 0
+		z-index: -1
+		+media-breakpoint-up(sm)
+			position: initial
+	/* .calendar__open */
+	&__open
+		background-color: #fff
+		position: relative
+		border-radius: 28px
+		padding: 40px 20px
+		bottom: 10px
+		max-width: calc(100% - 30px)
+		left: 15px
+		text-align: center
+		box-shadow: 0px 4px 20px #B8CAE3
+		+media-breakpoint-up(sm)
+			position: absolute
+			max-width: calc(100% - 50px)
+			border-radius: 48px
+			left: 25px
+		+media-breakpoint-up(md)
+			bottom: 50px
+		+media-breakpoint-up(lg)
+			padding: 60px 107px
+	/* .calendar__open-logo */
+	&__open-logo
+		margin-bottom: 12px
+		+media-breakpoint-up(md)
+			margin-bottom: 24px
+	/* .calendar__open-date */
+	&__open-date
+		margin-bottom: 16px
+		font-size: 20px
+		font-weight: 500
+		line-height: 140%
+		+media-breakpoint-up(md)
+			margin-bottom: 32px
+	/* .calendar__open-text */
+	&__open-text
+		font-weight: 500
+		line-height: 140%
+		margin-bottom: 20px
+		font-size: 16px
+		+media-breakpoint-up(md)
+			margin-bottom: 40px
+			font-size: 18px
+	/* .calendar__open-title */
+	&__open-title
+		color: $accent
+		font-size: 18px
+		font-weight: 700
+		line-height: 140%
+		margin-bottom: 16px
+		+media-breakpoint-up(sm)
+			font-size: 24px
+		+media-breakpoint-up(md)
+			margin-bottom: 32px
+	/* .calendar__open-btn */
+	&__open-btn
+		border-radius: 15px
+		border: 1px solid $accent
+		background: $accent
+		color: #fff
+		font-size: 18px
+		font-weight: 500
+		line-height: 140%
+		height: 53px
+		width: 243px
+		display: inline-flex
+		align-items: center
+		justify-content: center
+		transition: background-color .35s ease-out, color .35s ease-out
+		&:hover
+			text-decoration: none
+			color: $accent
+			background-color: transparent
+		+media-breakpoint-up(sm)
+			height: 63px
+			font-size: 20px
+
+.convert-inner
+	position: absolute
+	top: -20px
+	z-index: -1
+	left: 0
+	+media-breakpoint-up(xl)
+		top: -120px
+		// position: initial
+
+.inner-block
+	padding-top: 70px
+	position: relative
+	+media-breakpoint-up(sm)
+		padding-top: 50px
+		// bottom: 80px
+	+media-breakpoint-up(md)
+		padding-top: 0
+
+.inner
+	max-width: calc(100% - 10px)
+	background-color: #fff
+	border-radius: 20px
+	padding: 30px 20px
+	margin: 0 auto
+	min-height: 500px
+	box-shadow: 0px 4px 20px #B8CAE3
+	+media-breakpoint-up(sm)
+		// position: absolute
+		max-width: calc(100% - 50px)
+		// left: 25px
+		background-size: auto
+		border-radius: 30px
+		padding: 50px
+		min-height: 900px
+		// top: 130px
+	+media-breakpoint-up(md)
+		border-radius: 60px
+	+media-breakpoint-up(lg)
+		padding: 70px
+	+media-breakpoint-up(xl)
+		padding: 100px
+	+media-breakpoint-up(wxp)
+		max-width: 1200px
+		left: calc(50% - 600px)
+		top: 80px
+	/* .inner__row */
+	&__row
+		+media-breakpoint-up(xl)
+			margin: 0 -12px
+			display: flex
+			flex-wrap: wrap
+		+media-breakpoint-up(wxp)
+			margin: 0 -24px
+	/* .inner__left */
+	&__left
+		+media-breakpoint-up(xl)
+			padding: 0 12px
+			flex: 1
+		+media-breakpoint-up(wxp)
+			padding: 0 24px
+	/* .inner__right */
+	&__right
+		+media-breakpoint-up(xl)
+			padding: 0 12px
+			flex: 0 1 470px
+		+media-breakpoint-up(wxp)
+			padding: 0 24px
+	&__right_column
+		+media-breakpoint-up(xl)
+			display: flex
+			flex-direction: column
+			justify-content: space-between
+	/* .inner__title */
+	&__title
+		font-size: 24px
+		font-weight: 700
+		line-height: 1.25
+		margin-bottom: 24px
+		+media-breakpoint-up(sm)
+			font-size: 28px
+		+media-breakpoint-up(md)
+			font-size: 36px
+		+media-breakpoint-up(lg)
+			font-size: 48px
+	/* .inner__text */
+	&__text
+		line-height: 180%
+		margin-bottom: 24px
+	/* .inner__btn */
+	&__btn
+		display: none
+		+media-breakpoint-up(xl)
+			display: inline-block
+	&__btn_mobile
+		display: inline-block
+		+media-breakpoint-up(xl)
+			display: none
+	/* .inner__hide */
+	&__hide
+		max-height: 0
+		overflow: hidden
+		transition: max-height .35s ease-out, padding .35s ease-out
+		&.open
+			padding-top: 40px
+		+media-breakpoint-up(sm)
+			&.open
+				padding-top: 80px
+	/* .inner__cookie-row */
+	&__cookie-row
+		display: flex
+		flex-wrap: wrap
+		justify-content: center
+		margin: 0 -15px
+		margin-top: 48px
+	/* .inner__cookie-item */
+	&__cookie-item
+		cursor: pointer
+	/* .inner__cookie-col */
+	&__cookie-col
+		padding: 0 15px
+		flex: 0 0 50%
+		text-align: center
+		+media-breakpoint-up(sm)
+			flex: 0 0 33.3333%
+	/* .inner__cookie */
+	&__cookie
+
+.rebus
+	margin-bottom: 30px
+	+media-breakpoint-up(xl)
+		margin-bottom: 0
+	/* .rebus__text */
+	&__text
+		font-size: 16px
+		font-weight: 400
+		line-height: 150%
+		margin-bottom: 16px
+	/* .rebus__img-block */
+	&__img-block
+		border: 1px solid #7198D2
+		border-radius: 18px
+		display: flex
+		justify-content: center
+		align-items: center
+		padding: 10px
+		+media-breakpoint-up(sm)
+			border-radius: 32px
+
+	/* .rebus__img */
+	&__img
+
+.counter
+	background-color: #E4EEFF
+	border-radius: 18px
+	padding: 28px
+	margin-bottom: 32px
+	+media-breakpoint-up(sm)
+		padding: 48px 64px
+		border-radius: 32px
+	+media-breakpoint-up(xl)
+		margin-bottom: 0
+	/* .counter__count */
+	&__count
+		color: $accent
+		font-size: 48px
+		line-height: 48px
+		font-weight: 400
+		margin-bottom: 24px
+		text-align: center
+		+media-breakpoint-up(sm)
+			font-size: 64px
+			line-height: 64px
+	/* .counter__text */
+	&__text
+		text-align: center
+		font-size: 18px
+		font-weight: 500
+		line-height: 150%
+		+media-breakpoint-up(sm)
+			font-size: 20px
+
+.form
+	background-color: #E4EEFF
+	border-radius: 20px
+	padding: 28px 20px
+	+media-breakpoint-up(sm)
+		padding: 38px 44px
+		border-radius: 32px
+	+media-breakpoint-up(lg)
+		padding: 48px 64px
+	&_question
+		margin-top: 24px
+	/* .form__row */
+	&__row
+		+media-breakpoint-up(md)
+			display: flex
+			margin: 0 -12px
+	/* .form__col */
+	&__col
+		+media-breakpoint-up(md)
+			padding: 0 12px
+	&__col_50
+		+media-breakpoint-up(md)
+			flex: 0 0 50%
+	/* .form__label */
+	&__label
+		width: 100%
+		margin-bottom: 32px
+	/* .form__label-text */
+	&__label-text
+		font-size: 16px
+		font-weight: 500
+		line-height: 125%
+		margin-bottom: 8px
+	/* .form__input */
+	&__input
+		border: none
+		border-radius: 12px
+		background-color: #fff
+		padding: 15px 20px
+		width: 100%
+		outline: 0
+		font-size: 14px
+		font-weight: 400
+		line-height: 125%
+		+media-breakpoint-up(sm)
+			padding: 20px 24px
+			font-size: 16px
+	/* .form__btn */
+	&__btn
+		// margin-right: 16px
+	/* .form__btn-row */
+	&__btn-row
+		display: flex
+		flex-wrap: wrap
+		justify-content: center
+		gap: 16px
+	/* .form__textarea-block */
+	&__textarea-block
+		position: relative
+	/* .form__textarea-text */
+	&__textarea-text
+		position: absolute
+		color: #7198D2
+		font-size: 14px
+		font-weight: 500
+		line-height: 128%
+		bottom: 16px
+		right: 16px
+	/* .form__textarea */
+	&__textarea
+		min-height: 160px
+		padding: 15px 20px 30px 20px
+		+media-breakpoint-up(sm)
+			padding: 20px 24px 30px 24px
+	/* .form__radio */
+	&__radio
+		&:checked+.form__design-item
+			border-color: #4E68D6
+	/* .form__design-title */
+	&__design-title
+		font-weight: 600
+		margin-bottom: 20px
+	/* .form__design-row */
+	&__design-row
+		display: flex
+		flex-wrap: wrap
+		+media-breakpoint-up(sm)
+			gap: 8px
+	/* .form__radio */
+	&__radio
+		display: none
+	/* .form__design-item */
+	&__design-item
+		border: 2px solid transparent
+		border-radius: 12px
+		overflow: hidden
+		cursor: pointer
+		margin: 0
+		max-width: 125px
+		+media-breakpoint-up(sm)
+			max-width: 132px
+	/* .form__design-item-img */
+	&__design-item-img
+		height: 100%
+		width: 100%
+		object-fit: cover
+
+	/* .form__question-number */
+	&__question-number
+		color: #5F669E
+		font-size: 20px
+		font-weight: 500
+		margin-bottom: 16px
+	/* .form__bar */
+	&__bar
+		border-radius: 12px
+		background-color: #fff
+		height: 16px
+		margin-bottom: 40px
+	/* .form__bar-progress */
+	&__bar-progress
+		background-color: #4E68D6
+		height: 16px
+		width: 12.5%
+		border-radius: 12px
+	/* .form__question-row */
+	&__question-row
+		+media-breakpoint-up(lg)
+			display: flex
+			margin: 0 -10px
+	/* .form__question-left */
+	&__question-left
+		+media-breakpoint-up(lg)
+			flex: 0 0 284px
+			padding: 0 10px
+	/* .form__question-right */
+	&__question-right
+		+media-breakpoint-up(lg)
+			flex: 1
+			padding: 0 10px
+	/* .form__question-title */
+	&__question-title
+		font-size: 16px
+		font-weight: 600
+		line-height: 160%
+		margin-bottom: 24px
+		+media-breakpoint-up(sm)
+			font-size: 20px
+			margin-bottom: 32px
+	/* .form__question-answer-row */
+	&__question-answer-row
+		+media-breakpoint-up(sm)
+			display: flex
+			flex-wrap: wrap
+			margin: 0	-10px
+	/* .form__question-answer-item */
+	&__question-answer-item
+		margin-bottom: 10px
+		+media-breakpoint-up(sm)
+			margin-bottom: 20px
+			padding: 0 10px
+			flex: 1 1 auto
+	/* .form__question-radio */
+	&__question-radio
+		display: none
+		&:checked + .form__question-answer .form__question-answer-box
+			background-color: #4E68D6
+			background-image: url('../images/check.svg')
+			background-repeat: no-repeat
+			background-position: center
+			background-size: 60%
+			+media-breakpoint-up(sm)
+				background-size: initial
+
+	/* .form__question-answer */
+	&__question-answer
+		background-color: #fff
+		width: 100%
+		padding: 12px 18px
+		display: flex
+		align-items: center
+		border-radius: 12px
+		margin-bottom: 0
+		cursor: pointer
+		+media-breakpoint-up(sm)
+			padding: 18px 24px
+	/* .form__question-answer-box */
+	&__question-answer-box
+		height: 24px
+		width: 24px
+		flex: 0 0 24px
+		background-color: #E7E7E7
+		margin-right: 10px
+		border-radius: 6px
+		+media-breakpoint-up(sm)
+			margin-right: 16px
+			height: 32px
+			width: 32px
+			flex: 0 0 32px
+	/* .form__question-answer-text */
+	&__question-answer-text
+		color: #282725
+		font-size: 16px
+		+media-breakpoint-up(sm)
+			font-weight: 500
+	/* .form__question-btn-row */
+	&__question-btn-row
+		display: flex
+		gap: 10px
+		flex-wrap: wrap
+
+.quiz-form
+	/* .quiz-form__finish */
+	&__finish
+		text-align: center
+		max-width: 590px
+		margin: 0 auto
+	/* .quiz-form__finish-img */
+	&__finish-img
+		margin-bottom: 24px
+	/* .quiz-form__finish-title */
+	&__finish-title
+		color: #282725
+		font-size: 18px
+		font-weight: 600
+		line-height: 160%
+		margin-bottom: 24px
+		+media-breakpoint-up(sm)
+			font-size: 20px
+		span
+			color: $accent
+	/* .quiz-form__finish-text */
+	&__finish-text
+		font-size: 16px
+		font-weight: 500
+		line-height: 175%
+		margin-bottom: 30px
+		+media-breakpoint-up(sm)
+			margin-bottom: 60px
+
+@keyframes "fade"
+	from
+		opacity: 0
+	to
+		opacity: 1
