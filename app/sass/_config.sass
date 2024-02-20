@@ -82,16 +82,15 @@ body
 	// background-size: contain, cover
 
 .body
-	background: #7198d2
-	background-image: url("../images/src/confetti.png")
-	background-repeat: no-repeat
-	background-size: cover
+	background: url("../images/dest/decor.png"), #7198d2
+	// background-size: contain
+	background-repeat: repeat-y
 	+media-breakpoint-up(sm)
-		background-image: url("../images/src/confetti.png"), linear-gradient(90deg, #6D91C7 0%, #7198D2 49.37%, #A9C2E7 100%)
-	&_main
-		background: #7198d2
-		background-image: url("../images/src/confetti.png"), url("../images/src/decor.png")
-		background-repeat: no-repeat
-		background-size: cover
+		background: url("../images/dest/decor.png"), linear-gradient(90deg, #6D91C7 0%, #7198D2 49.37%, #A9C2E7 100%)
+		// background-size: contain
+		background-repeat: repeat-y
+	&__bg
+		background-image: url("../images/dest/confetti1.png"), url("../images/dest/confetti2.png")
+		background-size: 210%
 		+media-breakpoint-up(sm)
-			background-image: url("../images/src/confetti.png"), url("../images/src/decor.png"), linear-gradient(90deg, #6D91C7 0%, #7198D2 49.37%, #A9C2E7 100%)
+			background-size: 120%,105%

@@ -8,22 +8,26 @@
 	z-index: 2
 
 .success
-	margin-top: 30px
+	margin: 15px 0
 	background-color: #3fb53f
 	padding: 20px
 	color: #fff
 	animation: fade .25s ease
+	border-radius: 12px
+	font-size: 16px
 	p
 		margin: 0
 
 .errors-list
 	list-style-type: none
 	padding: 0
-	margin-top: 30px
+	margin: 15px 0
 	background-color: #da4c4c
 	padding: 20px
 	color: #fff
 	animation: fade .25s ease
+	border-radius: 12px
+	font-size: 16px
 
 img
 	max-width: 100%
@@ -37,7 +41,7 @@ img
 	padding-bottom: 56.25%
 	height: 0
 	overflow: hidden
-	margin-bottom: 30px
+	// margin-bottom: 30px
 	iframe, video
 		position: absolute
 		top: 0
@@ -241,6 +245,8 @@ img
 	+media-breakpoint-up(sm)
 		width: initial
 		min-width: 156px
+	&.disabled
+		pointer-events: none
 	&_reverse
 		background-color: transparent
 		color: $accent
@@ -264,6 +270,14 @@ img
 		font-size: 16px
 	+media-breakpoint-up(md)
 		padding: 20px 32px
+	&_back
+		background-color: #7198d2
+		padding: 15px 20px
+		border-radius: 12px
+		border: 1px solid #7198d2
+		&:hover
+			background-color: transparent
+			color: #7198d2
 
 .section
 	padding: 30px 0
@@ -276,6 +290,8 @@ img
 		position: relative
 	&_gray
 		background-color: #fafafa
+	&_hidden
+		overflow: hidden
 
 .container
 	padding: 0 10px
@@ -448,11 +464,11 @@ img
 	padding: 20px
 	max-width: 918px
 	margin: 0 auto
-	transform: rotate(-3deg)
 	position: relative
 	bottom: 30px
 	margin-bottom: 30px
 	+media-breakpoint-up(sm)
+		transform: rotate(-3deg)
 		bottom: 50px
 		padding: 30px
 		border-radius: 48px
@@ -533,22 +549,24 @@ img
 	&__img
 	&__img_open
 		position: absolute
-		bottom: 0
+		top: -90px
 		z-index: -1
 		+media-breakpoint-up(sm)
 			position: initial
 	/* .calendar__open */
 	&__open
+		width: 100%
 		background-color: #fff
 		position: relative
 		border-radius: 28px
 		padding: 40px 20px
-		bottom: 10px
+		margin-top: 100px
 		max-width: calc(100% - 30px)
 		left: 15px
 		text-align: center
 		box-shadow: 0px 4px 20px #B8CAE3
 		+media-breakpoint-up(sm)
+			bottom: 10px
 			position: absolute
 			max-width: calc(100% - 50px)
 			border-radius: 48px
@@ -581,20 +599,33 @@ img
 			font-size: 18px
 	/* .calendar__open-title */
 	&__open-title
-		color: $accent
+		color: #7198D2
 		font-size: 18px
 		font-weight: 700
 		line-height: 140%
 		margin-bottom: 16px
+		display: flex
+		align-items: center
+		justify-content: center
 		+media-breakpoint-up(sm)
 			font-size: 24px
 		+media-breakpoint-up(md)
 			margin-bottom: 32px
+		// &:before, &:after
+		// 	content: ''
+		// 	background-image: url('../images/icon-tree.svg')
+		// 	height: 32px
+		// 	width: 32px
+		// 	flex: 0 0 32px
+		// 	display: inline-block
+		// 	margin: 0 5px
+		// &:after
+		// 	transform: scale(-1, 1)
 	/* .calendar__open-btn */
 	&__open-btn
 		border-radius: 15px
-		border: 1px solid $accent
-		background: $accent
+		border: 1px solid #7198D2
+		background: #7198D2
 		color: #fff
 		font-size: 18px
 		font-weight: 500
@@ -607,7 +638,7 @@ img
 		transition: background-color .35s ease-out, color .35s ease-out
 		&:hover
 			text-decoration: none
-			color: $accent
+			color: #7198D2
 			background-color: transparent
 		+media-breakpoint-up(sm)
 			height: 63px
@@ -662,6 +693,13 @@ img
 		max-width: 1200px
 		left: calc(50% - 600px)
 		top: 80px
+	&_hidden
+		overflow: hidden
+	&_photo
+		position: relative
+		overflow: hidden
+		top: 0
+		left: 0
 	/* .inner__row */
 	&__row
 		+media-breakpoint-up(xl)
@@ -749,8 +787,15 @@ img
 
 .rebus
 	margin-bottom: 30px
+	display: none
 	+media-breakpoint-up(xl)
+		display: block
 		margin-bottom: 0
+	&_mobile
+		display: block
+		margin-top: 30px
+		+media-breakpoint-up(xl)
+			display: none
 	/* .rebus__text */
 	&__text
 		font-size: 16px
@@ -767,7 +812,6 @@ img
 		padding: 10px
 		+media-breakpoint-up(sm)
 			border-radius: 32px
-
 	/* .rebus__img */
 	&__img
 
@@ -863,6 +907,7 @@ img
 		font-size: 14px
 		font-weight: 400
 		line-height: 125%
+		border: 1px solid transparent
 		+media-breakpoint-up(sm)
 			padding: 20px 24px
 			font-size: 16px
@@ -922,6 +967,7 @@ img
 		cursor: pointer
 		margin: 0
 		max-width: 125px
+		max-height: 89px
 		+media-breakpoint-up(sm)
 			max-width: 132px
 	/* .form__design-item-img */
@@ -929,7 +975,85 @@ img
 		height: 100%
 		width: 100%
 		object-fit: cover
-
+	/* .form__design-preview */
+	&__design-preview
+		position: absolute
+		z-index: -99
+		top: 0
+		left: 0
+		width: 1200px
+		height: 675px
+		display: none
+		background-size: contain
+	/* .form__design-preview-img */
+	&__design-preview-img
+		position: absolute
+		z-index: 2
+		top: 0
+		left: 0
+		width: 1200px
+		height: 675px
+		display: block
+	/* .form__design-preview-sender*/
+	&__design-preview-sender
+		position: absolute
+		z-index: 3
+		left: 170px
+		top: 120px
+		width: 100%
+		max-width: 400px
+		font-size: 26px
+		min-height: 64px
+		max-height: 64px
+		overflow: hidden
+		display: flex
+		// align-items: center
+		color: $accent
+		font-weight: 400
+		line-height: 32px
+	&__design-preview-sender-left
+		margin-right: 10px
+		flex: 0 0 108px
+		font-weight: 500
+	&__design-preview-sender-right
+		word-break: break-all
+	/* .form__design-preview-recipient*/
+	&__design-preview-recipient
+		position: absolute
+		z-index: 3
+		left: 170px
+		top: 224px
+		width: 100%
+		max-width: 400px
+		font-size: 26px
+		min-height: 64px
+		max-height: 64px
+		overflow: hidden
+		display: flex
+		// align-items: center
+		color: $accent
+		font-weight: 400
+		line-height: 32px
+	&__design-preview-recipient-left
+		margin-right: 10px
+		font-weight: 500
+	&__design-preview-recipient-right
+		word-break: break-all
+	/* .form__design-preview-text */
+	&__design-preview-text
+		hyphens: auto
+		position: absolute
+		z-index: 3
+		left: 170px
+		top: 337px
+		max-width: 840px
+		font-size: 24px
+		line-height: 38px
+		min-height: 167px
+		display: flex
+		// align-items: center
+		color: $accent
+		font-weight: 400
 	/* .form__question-number */
 	&__question-number
 		color: #5F669E
@@ -972,6 +1096,12 @@ img
 		+media-breakpoint-up(sm)
 			font-size: 20px
 			margin-bottom: 32px
+	/* .form__question-img-block */
+	&__question-img-block
+		margin-bottom: 20px
+	/* .form__question-img */
+	&__question-img
+		width: 600px
 	/* .form__question-answer-row */
 	&__question-answer-row
 		+media-breakpoint-up(sm)
@@ -1064,10 +1194,19 @@ img
 		font-weight: 500
 		line-height: 125%
 		margin-bottom: 8px
+	/* .form__rebus-item-img-block */
+	&__rebus-item-img-block
+		margin-bottom: 8px
+		background-color: #fff
+		display: flex
+		align-items: center
+		justify-content: center
+		min-height: 200px
+		max-height: 200px
 	/* .form__rebus-item-img */
 	&__rebus-item-img
-		margin-bottom: 8px
-		width: 100%
+		// margin-bottom: 8px
+		// width: 100%
 
 .quiz-form
 	/* .quiz-form__finish */
@@ -1098,6 +1237,16 @@ img
 		+media-breakpoint-up(sm)
 			margin-bottom: 60px
 
+#modal-video
+	align-items: center
+	.modal__content
+		min-height: initial
+		padding: 0
+		max-width: 1200px
+	.modal__content-close
+		top: -48px
+		right: 0
+
 .modal
 	display: none
 	// display: flex
@@ -1107,7 +1256,7 @@ img
 	background-color: rgba(228,238,255, .6)
 	top: 0
 	left: 0
-	z-index: 23
+	z-index: 200
 	animation: fade .25s ease
 	align-items: flex-start
 	justify-content: center
@@ -1120,6 +1269,7 @@ img
 		box-shadow: 0px 0px 20px #B8CAE3
 		max-width: 1080px
 		width: 100%
+		min-height: 100%
 		// height: 100%
 		// overflow: auto
 		+media-breakpoint-up(sm)
@@ -1133,6 +1283,18 @@ img
 			border-radius: 48px
 	&__content_horoscope
 		max-width: 665px
+	&__content_response
+		max-width: 665px
+		+media-breakpoint-up(sm)
+			min-height: auto
+	&__content_video
+		padding-top: 60px
+		+media-breakpoint-up(sm)
+			min-height: auto
+			padding-top: 50px
+		+media-breakpoint-up(md)
+			padding-top: 120px
+
 	/* .modal__content-close */
 	&__content-close
 		position: absolute
@@ -1174,11 +1336,19 @@ img
 			font-size: 16px
 		ul, ol
 			padding-left: 20px
+		img
+			margin-bottom: 8px
+		+media-breakpoint-up(sm)
+			.alignleft
+				display: block
+				padding: 0
+				float: left
+				margin: 15px 30px 30px 0
+				width: 50%
 	/* .modal__content-row */
 	&__content-row
 		+media-breakpoint-up(md)
 			margin: 0 -10px
-			align-items: center
 			display: flex
 	/* .modal__content-left */
 	&__content-left
@@ -1190,6 +1360,17 @@ img
 		+media-breakpoint-up(md)
 			padding: 0 10px
 			flex: 1
+	/* .modal__response */
+	&__response
+		margin: 60px 0
+		font-weight: 500
+		text-align: center
+	/* .modal__btn-row */
+	&__btn-row
+		display: flex
+		flex-wrap: wrap
+		justify-content: center
+		gap: 16px
 
 .mark
 	text-align: center
@@ -1257,22 +1438,28 @@ img
 		background-color: #007FFC
 		border-radius: 8px
 		color: #FFF
-		font-size: 16px
+		font-size: 12px
 		font-weight: 500
 		line-height: 90%
 		display: inline-block
-		padding: 12px 15px
+		padding: 4px 5px
 		bottom: 0
 		left: 0
 		position: absolute
-		opacity: 0
+		opacity: 1
 		transition: .35s ease-out
-		min-width: 110px
+		min-width: 66px
 		z-index: 1
-		left: calc(50% - 55px)
+		left: calc(50% - 33px)
+		+media-breakpoint-up(md)
+			padding: 7px 9px
+			min-width: 86px
+			left: calc(50% - 44px)
 		+media-breakpoint-up(lg)
 			min-width: 140px
 			font-size: 20px
+			padding: 12px 15px
+			opacity: 0
 		+media-breakpoint-up(wxp)
 			right: -70px
 			left: auto
@@ -1284,23 +1471,86 @@ img
 
 .video-29dec
 	margin-bottom: 40px
+	display: none
+	align-items: center
+	justify-content: center
+	background-color: #424242
+	min-height: 235px
+	cursor: pointer
+	background-image: url('../images/video-preview.jpg')
+	background-position: center
+	background-size: contain
+	+media-breakpoint-up(sm)
+		min-height: 335px
+	+media-breakpoint-up(lg)
+		min-height: 405px
+	+media-breakpoint-up(xl)
+		min-height: 335px
+		display: flex
+	&_mobile
+		display: flex
+		+media-breakpoint-up(xl)
+			display: none
+	&__play-block
+		padding: 45px 43.5px 45px 58px
+		background: #ffffff
 
 .wishes
-	/* .wishes__image-row */
-	&__image-row
-		display: flex
-		align-items: flex-end
-		justify-content: space-between
-	/* .wishes__image-col */
-	&__image-col
-
+	position: relative
+	+media-breakpoint-up(md)
+		margin-top: 160px
+	+media-breakpoint-up(xl)
+		margin-top: 0
 	/* .wishes__image */
 	&__image
+		max-height: 340px
+		+media-breakpoint-up(sm)
+			max-height: initial
+	&__image_sneg
+		position: absolute
+		bottom: 90px
+		right: -110px
+		+media-breakpoint-up(sm)
+			right: -170px
+		+media-breakpoint-up(md)
+			bottom: -2px
+			right: -70px
+		+media-breakpoint-up(lg)
+			right: 0
+	&__image_moroz
+		position: absolute
+		bottom: 100px
+		left: -80px
+		+media-breakpoint-up(sm)
+			left: -160px
+		+media-breakpoint-up(md)
+			bottom: 0px
+			left: 0px
+	/* .wishes__bag-block */
+	&__bag-block
+		position: absolute
+		max-width: 500px
+		width: 500px
+		bottom: -1px
+		left: calc(50% - 250px)
+		z-index: 1
 	/* .wishes__bag */
 	&__bag
-		margin-bottom: 30px
+		position: absolute
+		bottom: 0
+		width: 100%
+		left: calc(50% - 210px)
+		max-width: 420px
+		+media-breakpoint-up(sm)
+			left: 0
+			max-width: 500px
+			// left: calc(50% - 160px)
 	/* .wishes__form */
 	&__form
+	/* wishes__img-block */
+	&__img-block
+		position: relative
+		min-height: 515px
 
 .rebus-form
 	/* .rebus-form__title */
@@ -1325,13 +1575,16 @@ img
 		margin-bottom: 100px
 		background-image: url('../images/rebus-result.png')
 		// background-repeat: no-repeat
-		background-size: contain
+		background-size: 120%
+		background-position: right
 		+media-breakpoint-up(sm)
 			padding: 30px
 			font-size: 16px
 		+media-breakpoint-up(md)
 			padding: 60px 90px
 			font-size: 20px
+			background-size: contain
+			background-position: initial
 		+media-breakpoint-up(lg)
 			padding: 60px 123px
 		span
@@ -1382,6 +1635,58 @@ img
 		padding-left: 27px
 		+media-breakpoint-up(sm)
 			font-size: 16px
+
+.tags
+	width: 250px
+	height: 250px
+	position: relative
+	margin: 0 auto
+	text-align: center
+	+media-breakpoint-up(sm)
+		height: 300px
+	/* .tags__item */
+	&__item
+		position: absolute
+		top: 0px
+		left: 0px
+		text-decoration: none
+		line-height: 18px
+		text-align: center
+		font-size: 12px
+		font-weight: 600
+		padding: 5px
+		display: inline-block
+		border-radius: 3px
+		color: #fff
+		&:hover
+			color: #fff
+			background: #0080fb
+	&__item_fz14
+		font-size: 14px
+	&__item_fz16
+		font-size: 16px
+	&__item_fz18
+		font-size: 18px
+	//  /* .tags__item_c1 */
+	// &__item_c1
+	// 	background: #666
+	// 	color: #fff
+	//  /* .tags__item_c2 */
+	// &__item_c2
+	// 	background: #F16E50
+	// 	color: #fff
+	//  /* .tags__item_c3 */
+	// &__item_c3
+	// 	background: #006633
+	// 	color: #fff
+
+.back
+	text-align: center
+	margin-top: 30px
+	margin-top: 60px
+	padding-top: 40px
+	border-top: 1px solid #dedede
+
 @keyframes "fade"
 	from
 		opacity: 0

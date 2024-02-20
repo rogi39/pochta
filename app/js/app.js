@@ -35,9 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	// 	},
 	// 	{
 	// 		question: 'Рождество, Джон Макклейн, небоскреб, орех –  к какому фильму относятся эти слова-подсказки?',
-	// 		type: 'text',
-	// 		answers: [],
-	// 		correct: 'Крепкий орешек'
+	// 		type: 'radio',
+	// 		answers: [
+	// 			'Тертый калач',
+	// 			'Деловая колбаса',
+	// 			'Крепкий орешек'
+	// 		],
+	// 		correct: 2
 	// 	},
 	// 	{
 	// 		question: 'Из-за чего поссорились Матроскин и Шарик в мультфильме «Зима в Простоквашино»?',
@@ -113,6 +117,37 @@ function getCookie(name) {
 	return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+function deleteCookie(name) {
+	setCookie(name, "", {
+		'max-age': -1
+	})
+}
+
+function setCookie(name, value, options = {}) {
+
+	options = {
+		path: '/',
+		// при необходимости добавьте другие значения по умолчанию
+		...options
+	};
+
+	if (options.expires instanceof Date) {
+		options.expires = options.expires.toUTCString();
+	}
+
+	let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+	for (let optionKey in options) {
+		updatedCookie += "; " + optionKey;
+		let optionValue = options[optionKey];
+		if (optionValue !== true) {
+			updatedCookie += "=" + optionValue;
+		}
+	}
+
+	document.cookie = updatedCookie;
+}
+
 function num_word(value, words) {
 	value = Math.abs(value) % 100;
 	var num = value % 10;
@@ -122,13 +157,27 @@ function num_word(value, words) {
 	return words[2];
 }
 
+(function () {
+	// Add event listener
+	document.addEventListener("mousemove", parallax);
+	const elem = document.querySelector("#parallax");
+	// Magic happens here
+	function parallax(e) {
+		if (elem) {
+			let _w = window.innerWidth / 2;
+			let _h = window.innerHeight / 2;
+			let _mouseX = e.clientX;
+			let _mouseY = e.clientY;
+			let _depth1 = `${90 - (_mouseX - _w) * 10}% ${90 - (_mouseY - _h) * 10}%`;
+			let _depth2 = `${0 - (_mouseX - _w) * 0.001}% ${0 - (_mouseY - _h) * 0.001}%`;
+			let _depth3 = `${0 - (_mouseX - _w) * 0.004}% ${0 - (_mouseY - _h) * 0.004}%`;
+			let x = `${_depth3}, ${_depth2}, ${_depth1}`;
+			// console.log(x);
+			elem.style.backgroundPosition = x;
+		}
+	}
 
-
-
-var scene = document.getElementById('scene');
-if (scene) {
-	var parallaxInstance = new Parallax(scene);
-}
+})();
 
 function fadeIn(el, timeout, display) {
 	el.style.opacity = 0;

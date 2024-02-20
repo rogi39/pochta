@@ -73,14 +73,18 @@
 							</label>
 							<div class="form__label">
 								<div class="form__design-title">Выберите дизайн открытки:</div>
+								<div class="form__design-preview">
+									<img src="images/design2.jpg" alt="" class="form__design-preview-img">
+									<div class="form__design-preview-text"></div>
+								</div>
 								<div class="form__design-row">
-									<input class="form__radio" type="radio" name="design" id="design1" checked>
-									<label class="form__design-item" for="design1">
-										<img src="images/design1.jpg" alt="" class="form__design-item-img">
-									</label>
-									<input class="form__radio" type="radio" name="design" id="design2">
+									<input class="form__radio" type="radio" name="design" id="design2" checked>
 									<label class="form__design-item" for="design2">
 										<img src="images/design2.jpg" alt="" class="form__design-item-img">
+									</label>
+									<input class="form__radio" type="radio" name="design" id="design1">
+									<label class="form__design-item" for="design1">
+										<img src="images/design1.jpg" alt="" class="form__design-item-img">
 									</label>
 									<input class="form__radio" type="radio" name="design" id="design3">
 									<label class="form__design-item" for="design3">
@@ -101,8 +105,8 @@
 								</div>
 							</div>
 							<div class="form__label form__textarea-block">
-								<textarea class="form__input form__textarea" placeholder="Напишите текст для открытки"></textarea>
-								<div class="form__textarea-text">Макс. кол-во символов 200</div>
+								<textarea class="form__input form__textarea" placeholder="Напишите текст для открытки" maxlength="200"></textarea>
+								<div class="form__textarea-text">Макс. кол-во символов <span>200</span></div>
 							</div>
 							<div class="form__btn-row">
 								<button class="form__btn btn">Отправить</button>
@@ -123,6 +127,24 @@
 
 	<script src="js/app.min.js"></script>
 
+
+	<script>
+		window.addEventListener('click', function (e) {
+
+			if (e.target.classList.contains('form__radio')) {
+				let preview = document.querySelector('.form__design-preview img');
+				preview.src = e.target.nextElementSibling.querySelector('img').src;
+			}
+		});
+
+		let textarea = document.querySelector('.form__textarea');
+		let textImage = document.querySelector('.form__design-preview-text');
+		let count = 0;
+		textarea.addEventListener('input', (e) => {
+			document.querySelector('.form__textarea-text span').textContent = 200 - e.target.value.length;
+			textImage.textContent = e.target.value;
+		});
+	</script>
 </body>
 
 </html>

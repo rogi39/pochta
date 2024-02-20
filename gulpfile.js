@@ -12,6 +12,7 @@ let paths = {
 		src: [
 			// 'node_modules/jquery/dist/jquery.min.js', // npm vendor example (npm i --save-dev jquery)
 			baseDir + '/libs/parallax/parallax.min.js',
+			baseDir + '/libs/mask_tel/mask_tel.js',
 			baseDir + '/js/app.js' // app.js. Always at the end
 		],
 		dest: baseDir + '/js',

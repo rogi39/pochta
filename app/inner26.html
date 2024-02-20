@@ -47,6 +47,12 @@
 					</div>
 
 					<form class="form form_question quiz-form"></form>
+					<div class="rebus rebus_mobile">
+						<div class="rebus__text">Отгадай слово, и впиши его в последнем письме</div>
+						<div class="rebus__img-block">
+							<img src="images/rebus.jpg" alt="rebus" class="rebus__img">
+						</div>
+					</div>
 					<script>
 						document.addEventListener("DOMContentLoaded", function () {
 							let quiz = '[{ "question": "1. Как звали почтовую сову Гарри Поттера?", "type": "radio", "image": "images/answer1.jpg", "answers": ["Белуха", "Букля", "Шикля"], "correct": 1 }, { "question": "2. Как зовут этого актера?", "type": "radio", "image": "images/answer2.jpg", "answers": ["Джон Траволта", "Джим Керри", "Брюс Уиллис"], "correct": 1 }, { "question": "3. Это кадр из мультфильма «Снеговик-почтовик», вспомните или угадайте, что написано на конверте?", "type": "radio", "image": "images/answer3.jpg", "answers": ["Дедушке Морозу от ребят", "На Северный Полюс пингвину Ермолке", "Снеговику-почтовику на меховую шапку и теплый тулуп"], "correct": 0 }, { "question": "4. Рождество, Джон Макклейн, небоскреб, орех –  к какому фильму относятся эти слова-подсказки?", "type": "text", "answers": [], "correct": "крепкий орешек" }, { "question": "5. Из-за чего поссорились Матроскин и Шарик в мультфильме «Зима в Простоквашино»?", "type": "radio", "image": "", "answers": ["Шарик нарисовал на печке рисунок, а Матроскин его раскритиковал, и Шарик обиделся", "Матроскин хотел съесть сосиску, а оказалось, что Шарик её уже съел сам, хоть она ему не принадлежала", "Шарик купил вместо валенок кеды, Матроскин назвал его балбесом, и тот обиделся"], "correct": 2 }, { "question": "6. Откуда эта песня – «Ждёт твоих подарочков ребятня. И тебе достанется от меня!»?", "type": "radio", "image": "", "answers": ["Снеговик-Почтовик", "Гринч, похититель Рождества", "Ну, погоди!"], "correct": 2 }, { "question": "7. В фильме «Гринч, похититель Рождества» главный положительный персонаж – девочка по имени Синди Лу. Вспомните или угадайте, кем работал её отец?", "type": "radio", "image": "", "answers": ["Мэром города", "Почтовым работником", "Он был безработным богачом"], "correct": 1 }, { "question": "8. «Рождественская история» – это экранизация повести Чарльза Диккенса «Рождественская песнь». Вспомните или угадайте, как звали этого персонажа?", "type": "radio", "image": "images/answer8.jpg", "answers": ["Скрудж", "Крэтчит", "Шварц"], "correct": 0 }]';
@@ -56,6 +62,13 @@
 
 							if (getCookie('quizFinish') == 1) {
 								renderResult();
+								document.querySelector('.btn[data-restart]').addEventListener('click', function (e) {
+									e.preventDefault();
+									deleteCookie('quizFinish');
+									deleteCookie('quizRes');
+									deleteCookie('quiz');
+									location.reload();
+								});
 							} else {
 								renderForm();
 
@@ -75,18 +88,17 @@
 										let target = e.target;
 										let bar = document.querySelector('.quiz-bar');
 										if (target.dataset.finish == 1) {
-											let confirmn = confirm('Завершить квиз?');
-											if (confirmn) {
-												let answers;
-												if (getCookie('quiz')) {
-													answers = JSON.parse(getCookie('quiz'));
-												}
-												let result = getResult(answers);
-												document.cookie = `quizFinish=1; max-age=${cookieTime}; path=/`;
-												document.cookie = `quizRes=${result}; max-age=${cookieTime}; path=/`;
-												renderResult();
-												return false;
+
+											let answers;
+											if (getCookie('quiz')) {
+												answers = JSON.parse(getCookie('quiz'));
 											}
+											let result = getResult(answers);
+											document.cookie = `quizFinish=1; max-age=${cookieTime}; path=/`;
+											document.cookie = `quizRes=${result}; max-age=${cookieTime}; path=/`;
+											renderResult();
+											return false;
+
 										}
 										if (target.dataset.quizNav == 'next' && current < arrLength) {
 											current++;
@@ -121,7 +133,10 @@
 									<img src="images/quizfinish.png" alt="quiz" class="quiz-form__finish-img">
 									<div class="quiz-form__finish-title">Вы прошли квиз, ответив правильно на ${res}</div>
 									<div class="quiz-form__finish-text">Возможно, вы захотели пересмотреть какие-то фильмы или мультики. Что ж, длинные зимние вечера – это лучшее время для кинопросмотров в хорошей компании!»</div>
-									<a href="/" class="btn btn_quiz btn_quiz-reverse">На главную страницу</a>
+									<div class="form__question-btn-row">
+										<a href="#" class="btn btn_quiz btn_quiz-reverse" data-restart>Пройти заново</a>
+										<a href="/" class="btn btn_quiz btn_quiz-reverse">На главную страницу</a>
+									</div>
 								</div>
 								`;
 								document.querySelector('.quiz-form').insertAdjacentHTML('beforeend', html);
@@ -133,16 +148,12 @@
 								<div class="form__bar">
 									<div class="form__bar-progress quiz-bar"></div>
 								</div>
-								<div class="form__question-row">
-									<div class="form__question-left quiz-img"></div>
-									<div class="form__question-right">
-										<div class="form__question-title quiz-title"></div>
-										<div class="form__question-answer-row quiz-answers"></div>
-										<div class="form__question-btn-row">
-											<a href="#" class="btn btn_quiz quiz-navigation" data-quiz-nav="prev">Предыдущий вопрос</a>
-											<a href="#" class="btn btn_quiz quiz-navigation" data-quiz-nav="next">Следующий вопрос</a>
-										</div>
-									</div>
+								<div class="form__question-title quiz-title"></div>
+								<div class="form__question-img-block quiz-img"></div>
+								<div class="form__question-answer-row quiz-answers"></div>
+								<div class="form__question-btn-row">
+									<a href="#" class="btn btn_quiz quiz-navigation" data-quiz-nav="prev">Предыдущий вопрос</a>
+									<a href="#" class="btn btn_quiz quiz-navigation" data-quiz-nav="next">Следующий вопрос</a>
 								</div>
 								`;
 								document.querySelector('.quiz-form').insertAdjacentHTML('beforeend', html);
@@ -159,7 +170,7 @@
 									image.removeChild(image.firstChild);
 								}
 								if (arr[current - 1].image) {
-									image.insertAdjacentHTML('beforeend', `<img class="quiz-img" src="${arr[current - 1].image}" alt="${arr[current - 1].question}">`);
+									image.insertAdjacentHTML('beforeend', `<img class="form__question-img quiz-img" src="${arr[current - 1].image}" alt="${arr[current - 1].question}">`);
 								}
 								let question = document.querySelector('.quiz-title');
 								question.textContent = arr[current - 1].question;
